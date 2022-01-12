@@ -1,2 +1,2 @@
 # MetaVis
-high quality and reproducible visualization 
+High quality and reproducible visualization 
