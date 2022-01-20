@@ -3,24 +3,29 @@
 #' @param dat dataframe
 #' @param x x
 #' @param group fill group
+#' @param displayN If display sample number, default=FALSE
 #'
 #' @return
 #' @export
 #'
 #' @examples
-BarplotPercentage <- function(dat,x,group){
-  dat %>%
+BarplotPercentage <- function(dat,x,group,displayN=FALSE){
+  dat <- dat %>%
     group_by_at(x) %>%
     count(Group = get(group)) %>%
     mutate(
       pct = prop.table(n),
-      lab = paste0(round(pct*100,1),"%"),
-      y = pct/2 + c(cumsum(rev(pct))[-length(pct)],0)
-    ) %>%
-    ggplot(aes_string(x = x, y = "pct", fill = "Group")) +
+      lab.p = paste0(round(pct*100,1),"%"),
+      y.p = pct/2 + c(cumsum(rev(pct))[-length(pct)],0),
+      lab.n = n,
+      y.n = n/2+c(cumsum(rev(n))[-length(n)],0)
+    )
+  y = ifelse(displayN,"n","pct")
+  ylab = ifelse(displayN,"Number","Percentage")
+  ggplot(dat,aes_string(x = x, y = y, fill = "Group")) +
     geom_bar(stat = "identity") +
     geom_text(aes(y=y,label = lab)) +
     scale_y_continuous(expand = expansion(mult = c(0,0)))+
-    xlab("") + ylab("Percentage")+
+    xlab("") + ylab(ylab)+
     theme_bw()
 }
