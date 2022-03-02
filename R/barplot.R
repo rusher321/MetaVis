@@ -16,9 +16,9 @@ BarplotPercentage <- function(dat,x,group,displayN=FALSE){
     mutate(
       pct = prop.table(n),
       lab.p = paste0(round(pct*100,1),"%"),
-      y.p = pct/2 + c(cumsum(rev(pct))[-length(pct)],0),
+      y.p = pct/2 + c(rev(cumsum(rev(pct))[-length(levels(Group))]), 0),
       lab.n = n,
-      y.n = n/2+c(cumsum(rev(n))[-length(n)],0)
+      y.n = n/2+c(rev(cumsum(rev(n))[-length(levels(Group))]), 0)
     )
   y = ifelse(displayN,"n","pct")
   ylab = ifelse(displayN,"Number","Percentage")
