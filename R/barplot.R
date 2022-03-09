@@ -24,7 +24,7 @@ BarplotPercentage <- function(dat,x,group,displayN=FALSE){
   ylab = ifelse(displayN,"Number","Percentage")
   ggplot(dat,aes_string(x = x, y = y, fill = "Group")) +
     geom_bar(stat = "identity") +
-    geom_text(aes(y=y,label = lab)) +
+    geom_text(aes_string(y=ifelse(displayN,"y.n","y.p"),label = "lab.n")) +
     scale_y_continuous(expand = expansion(mult = c(0,0)))+
     xlab("") + ylab(ylab)+
     theme_bw()
