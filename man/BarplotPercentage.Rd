@@ -4,7 +4,7 @@
 \alias{BarplotPercentage}
 \title{Barplot with percentage label}
 \usage{
-BarplotPercentage(dat, x, group, displayN = FALSE)
+BarplotPercentage(dat, x, group, yaxies = "p")
 }
 \arguments{
 \item{dat}{dataframe}
@@ -13,7 +13,7 @@ BarplotPercentage(dat, x, group, displayN = FALSE)
 
 \item{group}{fill group}
 
-\item{displayN}{If display sample number, default=FALSE}
+\item{yaxies}{If display sample number (n) or percentage (p), default=p}
 }
 \value{
 
